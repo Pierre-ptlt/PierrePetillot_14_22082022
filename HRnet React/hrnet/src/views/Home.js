@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import NameField from "../components/NameField";
 import DateField from "../components/DateField";
 import "../style/home.css";
+import statesList from "../data/States.js";
+import Dropdown from "../components/Dropdown";
+import departments from "../data/Departments";
 
 function Home() {
+	const states = statesList.map((state) => state.name);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const firstName = window.First.value;
@@ -25,9 +30,8 @@ function Home() {
 			state: state,
 			zipCode: zipCode,
 		};
-		console.log(employee);
 		employees.push(employee);
-		console.log(employees);
+		console.log(states);
 		localStorage.setItem("employees", JSON.stringify(employees));
 	};
 
@@ -56,11 +60,12 @@ function Home() {
 					<input id="city" type="text" />
 
 					<label htmlFor="state">State</label>
-					<select name="state" id="state"></select>
+					<Dropdown name="state" id="state" data={states} />
 
 					<label htmlFor="zipCode">Zip Code</label>
 					<input id="zipCode" type="number" />
 				</fieldset>
+				<Dropdown name="department" id="department" data={departments} />
 				<button onClick={handleSubmit} type="submit" className="home-submit">
 					Save
 				</button>
