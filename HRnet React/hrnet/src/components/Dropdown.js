@@ -1,3 +1,5 @@
+import "./dropdown.css";
+
 function Dropdown(props) {
 	const options = props.data.map((item) => {
 		return (
@@ -8,7 +10,7 @@ function Dropdown(props) {
 	});
 
 	return (
-		<select name={props.name} id={props.id}>
+		<select className="dropdown" name={props.name} id={props.id}>
 			{options}
 		</select>
 	);
