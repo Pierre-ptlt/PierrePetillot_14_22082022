@@ -7,14 +7,17 @@
 .home-fields {
     display: flex;
     flex-direction: column;
+    margin-top: 15px;
     width: 200px;
 }
 
 .adresse {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 330px;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
     margin-inline-start: 2px;
     margin-inline-end: 2px;
     padding-block-start: 0.35em;
@@ -26,4 +29,26 @@
     border-style: groove;
     border-color: rgb(192, 192, 192);
     border-image: initial;
+}
+
+.fieldset-item {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.fieldset-input {
+    width: 150px;
+}
+
+.department-wrapper {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-submit {
+    margin-top: 20px;
+    width: 100px;
+    margin-left: 40%;
+    margin-bottom: 100px;
 }

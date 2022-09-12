@@ -3,7 +3,7 @@ import NameField from "../components/NameField";
 import DateField from "../components/DateField";
 import "../style/home.css";
 import statesList from "../data/States.js";
-import Dropdown from "../components/Dropdown";
+import Dropdown from "pierre-ptlt-dropdown";
 import departments from "../data/Departments";
 
 function Home() {
@@ -19,6 +19,7 @@ function Home() {
 		const city = window.city.value;
 		const state = window.state.value;
 		const zipCode = window.zipCode.value;
+		const department = window.department.value;
 		const employees = JSON.parse(localStorage.getItem("employees")) || [];
 		const employee = {
 			firstName: firstName,
@@ -29,6 +30,7 @@ function Home() {
 			city: city,
 			state: state,
 			zipCode: zipCode,
+			department: department,
 		};
 		employees.push(employee);
 		console.log(states);
@@ -53,19 +55,42 @@ function Home() {
 				</div>
 				<fieldset className="adresse">
 					<legend>Adresse</legend>
-					<label htmlFor="street">Street</label>
-					<input id="street" type="text" />
+					<label className="fieldset-item" htmlFor="street">
+						Street
+					</label>
+					<input className="fieldset-input" id="street" type="text" />
 
-					<label htmlFor="city">City</label>
-					<input id="city" type="text" />
+					<label className="fieldset-item" htmlFor="city">
+						City
+					</label>
+					<input className="fieldset-input" id="city" type="text" />
 
-					<label htmlFor="state">State</label>
-					<Dropdown name="state" id="state" data={states} />
+					<label className="fieldset-item" htmlFor="state">
+						State
+					</label>
+					<Dropdown
+						className="fieldset-input"
+						name="state"
+						id="state"
+						data={states}
+					/>
 
-					<label htmlFor="zipCode">Zip Code</label>
-					<input id="zipCode" type="number" />
+					<label className="fieldset-item" htmlFor="zipCode">
+						Zip Code
+					</label>
+					<input className="fieldset-input" id="zipCode" type="number" />
 				</fieldset>
-				<Dropdown name="department" id="department" data={departments} />
+				<div className="department-wrapper">
+					<label className="fieldset-item" htmlFor="department">
+						Department
+					</label>
+					<Dropdown
+						className="department-dropdown"
+						name="department"
+						id="department"
+						data={departments}
+					/>
+				</div>
 				<button onClick={handleSubmit} type="submit" className="home-submit">
 					Save
 				</button>
