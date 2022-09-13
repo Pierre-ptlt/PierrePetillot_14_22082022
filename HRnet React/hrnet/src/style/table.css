@@ -1,3 +1,7 @@
 .table-header-cell {
     font-weight: bolder;
 }
+
+.MuiTableSortLabel-icon	{
+    opacity: 1 !important;
+}

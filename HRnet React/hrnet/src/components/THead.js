@@ -5,6 +5,8 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import TableCell from "@mui/material/TableCell";
+import { FaSortUp } from "react-icons/fa";
+import { createTheme } from "@mui/material";
 
 const cells = [
 	{
@@ -44,8 +46,12 @@ const cells = [
 		label: "zipCode",
 	},
 ];
+
 function THead(props) {
-	const { order, orderBy, onRequestSort } = props;
+	const order = props.order;
+	const orderBy = props.orderBy;
+	const onRequestSort = props.onRequestSort;
+
 	const handleSort = (cell) => (event) => {
 		onRequestSort(event, cell);
 	};
@@ -63,6 +69,8 @@ function THead(props) {
 							active={orderBy === headCell.id}
 							direction={orderBy === headCell.id ? order : "asc"}
 							onClick={handleSort(headCell.id)}
+							hideSortIcon={false}
+							IconComponent={FaSortUp}
 						>
 							{headCell.label}
 							{orderBy === headCell.id ? (

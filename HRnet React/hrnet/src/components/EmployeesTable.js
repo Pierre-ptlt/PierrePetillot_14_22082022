@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../style/table.css";
 import THead from "./THead";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -28,14 +29,12 @@ function EmployeesTable() {
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 
 	const sortEmployees = (event, property) => {
-		const isAsc = orderBy === property;
-		setOrder(isAsc ? "asc" : "desc");
+		setOrder(order === "asc" ? "desc" : "asc");
 		setOrderBy(property);
 	};
 
 	return (
 		<div>
-			<h1>Employees</h1>
 			<TableContainer>
 				<table>
 					<THead
