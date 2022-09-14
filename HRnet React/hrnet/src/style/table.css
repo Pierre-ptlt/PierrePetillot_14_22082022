@@ -5,3 +5,16 @@
 .MuiTableSortLabel-icon	{
     opacity: 1 !important;
 }
+
+.delete-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-icon {
+    color: red;
+    cursor: pointer;
+    width: 17px;
+    height: 25px;
+}

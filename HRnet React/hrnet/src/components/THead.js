@@ -6,7 +6,6 @@ import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import TableCell from "@mui/material/TableCell";
 import { FaSortUp } from "react-icons/fa";
-import { createTheme } from "@mui/material";
 
 const cells = [
 	{
@@ -45,6 +44,10 @@ const cells = [
 		id: "zipCode",
 		label: "zipCode",
 	},
+	{
+		id: "delete",
+		label: "Delete",
+	},
 ];
 
 function THead(props) {
@@ -75,7 +78,7 @@ function THead(props) {
 							{headCell.label}
 							{orderBy === headCell.id ? (
 								<Box component="span" sx={visuallyHidden}>
-									{order === "desc" ? "sorted descending" : "sorted ascending"}
+									{order === "asc" ? "sorted asccending" : "sorted descending"}
 								</Box>
 							) : null}
 						</TableSortLabel>

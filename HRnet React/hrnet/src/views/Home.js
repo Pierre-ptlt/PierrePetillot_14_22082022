@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import NameField from "../components/NameField";
 import DateField from "../components/DateField";
+import { useState } from "react";
 import "../style/home.css";
 import statesList from "../data/States.js";
 import Dropdown from "pierre-ptlt-dropdown";
 import departments from "../data/Departments";
+import closeModal from "../assets/images/closeModal.png";
 
 function Home() {
 	const states = statesList.map((state) => state.name);
+	const [showModal, setShowModal] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -22,6 +25,7 @@ function Home() {
 		const department = window.department.value;
 		const employees = JSON.parse(localStorage.getItem("employees")) || [];
 		const employee = {
+			id: employees.length + 1,
 			firstName: firstName,
 			lastName: lastName,
 			birthDate: birthDate,
@@ -33,7 +37,6 @@ function Home() {
 			department: department,
 		};
 		employees.push(employee);
-		console.log(states);
 		localStorage.setItem("employees", JSON.stringify(employees));
 	};
 
@@ -95,6 +98,16 @@ function Home() {
 					Save
 				</button>
 			</form>
+			{showModal && (
+				<div className="home-modal">
+					<div className="modal-wrapper">
+						<p className="modal-content">Employee created!</p>
+						<div className="modal-close" onClick={setShowModal(false)}>
+							{closeModal}
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

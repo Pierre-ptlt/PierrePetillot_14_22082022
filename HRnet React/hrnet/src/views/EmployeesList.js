@@ -1,20 +1,28 @@
 import { Link } from "react-router-dom";
 import "../style/employees.css";
+import { useState, useEffect } from "react";
 import Dropdown from "pierre-ptlt-dropdown";
 import EmployeesTable from "../components/EmployeesTable";
 
 function EmployeesList() {
+	const [rowsPerPage, setRowsPerPage] = useState(10);
+
+	const handleChangeRowsPerPage = (event) => {
+		setRowsPerPage(parseInt(event.target.value, 10));
+	};
+
 	return (
 		<div className="employees-list-wrapper">
 			<h1 className="employees-list-title">Current Employees</h1>
 			<div className="tools-wrapper">
 				<div className="show-wrapper">
 					Show{" "}
-					<Dropdown
-						className="show-dropdown"
-						id="show"
-						data={["10", "25", "50", "100"]}
-					/>{" "}
+					<select className="show-dropdown" onChange={handleChangeRowsPerPage}>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
 					entries
 				</div>
 				<div className="search-wrapper">
@@ -22,8 +30,9 @@ function EmployeesList() {
 				</div>
 			</div>
 			<div className="table-wrapper">
-				<EmployeesTable />
+				<EmployeesTable rowsPerPage={rowsPerPage} />
 			</div>
+			<Link to="/">Home</Link>
 		</div>
 	);
 }
