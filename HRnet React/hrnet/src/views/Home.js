@@ -3,14 +3,15 @@ import NameField from "../components/NameField";
 import DateField from "../components/DateField";
 import { useState } from "react";
 import "../style/home.css";
+import "../style/modal.css";
 import statesList from "../data/States.js";
 import Dropdown from "pierre-ptlt-dropdown";
 import departments from "../data/Departments";
-import closeModal from "../assets/images/closeModal.png";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 function Home() {
 	const states = statesList.map((state) => state.name);
-	const [showModal, setShowModal] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -38,16 +39,19 @@ function Home() {
 		};
 		employees.push(employee);
 		localStorage.setItem("employees", JSON.stringify(employees));
+		setIsOpen(true);
+		console.log(isOpen);
 	};
 
 	return (
 		<div className="home-wrapper">
+			{isOpen && <div className="modal-blur"></div>}
 			<h1 className="home-title">HRnet</h1>
 			<Link className="home-link" to="/list">
 				View current employees
 			</Link>
 			<h2 className="home-subtitle">Create employee</h2>
-			<form className="home-fields">
+			<form onSubmit={handleSubmit} className="home-fields">
 				<div className="home-identity-fields">
 					<NameField type="First" />
 					<NameField type="Last" />
@@ -94,17 +98,18 @@ function Home() {
 						data={departments}
 					/>
 				</div>
-				<button onClick={handleSubmit} type="submit" className="home-submit">
+				<button type="submit" className="home-submit">
 					Save
 				</button>
 			</form>
-			{showModal && (
+			{isOpen && (
 				<div className="home-modal">
-					<div className="modal-wrapper">
-						<p className="modal-content">Employee created!</p>
-						<div className="modal-close" onClick={setShowModal(false)}>
-							{closeModal}
-						</div>
+					<p className="modal-content">Employee created!</p>
+					<div className="modal-close">
+						<AiFillCloseCircle
+							className="modal-close-icon"
+							onClick={() => setIsOpen(false)}
+						/>
 					</div>
 				</div>
 			)}
