@@ -6,6 +6,7 @@ import EmployeesTable from "../components/EmployeesTable";
 
 function EmployeesList() {
 	const [rowsPerPage, setRowsPerPage] = useState(10);
+	const [research, setResearch] = useState("");
 
 	const handleChangeRowsPerPage = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
@@ -26,11 +27,18 @@ function EmployeesList() {
 					entries
 				</div>
 				<div className="search-wrapper">
-					Search: <input className="search-bar" type="text" />
+					Search:{" "}
+					<input
+						className="search-bar"
+						type="text"
+						onChange={(e) => {
+							setResearch(e.target.value);
+						}}
+					/>
 				</div>
 			</div>
 			<div className="table-wrapper">
-				<EmployeesTable rowsPerPage={rowsPerPage} />
+				<EmployeesTable rowsPerPage={rowsPerPage} searchData={research} />
 			</div>
 			<Link to="/">Home</Link>
 		</div>

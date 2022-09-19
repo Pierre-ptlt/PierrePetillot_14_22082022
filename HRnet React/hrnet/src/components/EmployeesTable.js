@@ -11,8 +11,8 @@ import TableRow from "@mui/material/TableRow";
 import Delete from "./Delete";
 
 function EmployeesTable(props) {
-	const employeesList = JSON.parse(localStorage.getItem("employees"));
 	const rowsPerPage = props.rowsPerPage;
+	const employeesList = JSON.parse(localStorage.getItem("employees"));
 	const employees = employeesList
 		? employeesList.map((employee) => {
 				return {
@@ -35,15 +35,44 @@ function EmployeesTable(props) {
 				};
 		  })
 		: [];
+
 	const [order, setOrder] = useState("asc");
 	const [orderBy, setOrderBy] = useState("firstName");
 	const [page, setPage] = useState(0);
+	const [filteredEmployees, setFilteredEmployees] = useState(employees);
 	const [rows, setRows] = useState(employees);
 
 	const sortEmployees = (event, property) => {
 		setOrder(order === "asc" ? "desc" : "asc");
 		setOrderBy(property);
 	};
+
+	useEffect(() => {
+		if (!props.searchData) {
+			setFilteredEmployees(employees);
+		} else {
+			setFilteredEmployees(
+				employees.filter((employee) => {
+					return (
+						employee.firstName
+							.toLowerCase()
+							.includes(props.searchData.toLowerCase()) ||
+						employee.lastName
+							.toLowerCase()
+							.includes(props.searchData.toLowerCase()) ||
+						employee.department
+							.toLowerCase()
+							.includes(props.searchData.toLowerCase())
+					);
+				})
+			);
+		}
+		console.log(filteredEmployees);
+	}, [props.searchData]);
+
+	useEffect(() => {
+		setRows(filteredEmployees);
+	}, [filteredEmployees]);
 
 	return (
 		<div>
@@ -82,6 +111,20 @@ function EmployeesTable(props) {
 					</TableBody>
 				</table>
 			</TableContainer>
+			<TablePagination
+				rowsPerPageOptions={[]}
+				component="div"
+				count={employees.length}
+				rowsPerPage={rowsPerPage}
+				page={page}
+				showLastButton={true}
+				showFirstButton={true}
+				onPageChange={(event, newPage) => setPage(newPage)}
+				onRowsPerPageChange={(event) => {
+					props.setRowsPerPage(parseInt(event.target.value, 10));
+					setPage(0);
+				}}
+			/>
 		</div>
 	);
 }
