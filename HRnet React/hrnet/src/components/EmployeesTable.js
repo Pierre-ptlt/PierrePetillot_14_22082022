@@ -67,7 +67,6 @@ function EmployeesTable(props) {
 				})
 			);
 		}
-		console.log(filteredEmployees);
 	}, [props.searchData]);
 
 	useEffect(() => {
@@ -77,7 +76,7 @@ function EmployeesTable(props) {
 	return (
 		<div>
 			<TableContainer>
-				<table>
+				<Table>
 					<THead
 						order={order}
 						orderBy={orderBy}
@@ -109,7 +108,7 @@ function EmployeesTable(props) {
 								);
 							})}
 					</TableBody>
-				</table>
+				</Table>
 			</TableContainer>
 			<TablePagination
 				rowsPerPageOptions={[]}

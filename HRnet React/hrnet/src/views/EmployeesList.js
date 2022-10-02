@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "../style/employees.css";
-import { useState, useEffect } from "react";
-import Dropdown from "pierre-ptlt-dropdown";
+import { useState } from "react";
 import EmployeesTable from "../components/EmployeesTable";
 
 function EmployeesList() {

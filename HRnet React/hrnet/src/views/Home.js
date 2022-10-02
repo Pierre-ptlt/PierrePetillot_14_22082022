@@ -8,6 +8,7 @@ import statesList from "../data/States.js";
 import Dropdown from "pierre-ptlt-dropdown";
 import departments from "../data/Departments";
 import { AiFillCloseCircle } from "react-icons/ai";
+const employees = JSON.parse(localStorage.getItem("employees")) || [];
 
 function Home() {
 	const states = statesList.map((state) => state.name);
@@ -24,7 +25,6 @@ function Home() {
 		const state = window.state.value;
 		const zipCode = window.zipCode.value;
 		const department = window.department.value;
-		const employees = JSON.parse(localStorage.getItem("employees")) || [];
 		const employee = {
 			id: employees.length + 1,
 			firstName: firstName,
@@ -40,7 +40,6 @@ function Home() {
 		employees.push(employee);
 		localStorage.setItem("employees", JSON.stringify(employees));
 		setIsOpen(true);
-		console.log(isOpen);
 	};
 
 	return (
@@ -52,52 +51,55 @@ function Home() {
 			</Link>
 			<h2 className="home-subtitle">Create employee</h2>
 			<form onSubmit={handleSubmit} className="home-fields">
-				<div className="home-identity-fields">
-					<NameField type="First" />
-					<NameField type="Last" />
-				</div>
-				<div className="home-date-fields">
-					<DateField type="birth" />
-					<DateField type="start" />
-				</div>
-				<fieldset className="adresse">
-					<legend>Adresse</legend>
-					<label className="fieldset-item" htmlFor="street">
-						Street
-					</label>
-					<input className="fieldset-input" id="street" type="text" />
+				<span id="test" className="home-form-fields-wrapper">
+					<div className="home-first-fields">
+					<div className="home-identity-fields">
+						<NameField type="First" />
+						<NameField type="Last" />
+					</div>
+					<div className="home-date-fields">
+						<DateField type="birth" />
+						<DateField type="start" />
+					</div>
+					</div>
+					<div className="adresse">
+						<label className="fieldset-item" htmlFor="street">
+							Street
+						</label>
+						<input className="fieldset-input" id="street" type="text" />
 
-					<label className="fieldset-item" htmlFor="city">
-						City
-					</label>
-					<input className="fieldset-input" id="city" type="text" />
+						<label className="fieldset-item" htmlFor="city">
+							City
+						</label>
+						<input className="fieldset-input" id="city" type="text" />
 
-					<label className="fieldset-item" htmlFor="state">
-						State
-					</label>
-					<Dropdown
-						className="fieldset-input"
-						name="state"
-						id="state"
-						data={states}
-					/>
+						<label className="fieldset-item" htmlFor="state">
+							State
+						</label>
+						<Dropdown
+							className="fieldset-input"
+							name="state"
+							id="state"
+							data={states}
+						/>
 
-					<label className="fieldset-item" htmlFor="zipCode">
-						Zip Code
-					</label>
+						<label className="fieldset-item" htmlFor="zipCode">
+							Zip Code
+							</label>
 					<input className="fieldset-input" id="zipCode" type="number" />
-				</fieldset>
-				<div className="department-wrapper">
-					<label className="fieldset-item" htmlFor="department">
-						Department
-					</label>
-					<Dropdown
-						className="department-dropdown"
-						name="department"
-						id="department"
-						data={departments}
-					/>
-				</div>
+					</div>
+				</span>
+					<div className="department-wrapper">
+						<label className="fieldset-item" htmlFor="department">
+							Department
+						</label>
+						<Dropdown
+							className="department-dropdown"
+							name="department"
+							id="department"
+							data={departments}
+						/>
+					</div>
 				<button type="submit" className="home-submit">
 					Save
 				</button>
